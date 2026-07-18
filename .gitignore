@@ -1,32 +1,25 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+.pytest_cache/
+__pycache__/
 
-# Test binary, built with `go test -c`
-*.test
+# esp-idf built binaries
+build/
+build_*_*/
+sdkconfig
+managed_components/
 
-# Code coverage profiles and other test artifacts
-*.out
-coverage.*
-*.coverprofile
-profile.cov
+# idf-ci build run output
+build_summary_*.xml
+app_info_*.txt
+size_info_*.txt
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# pytest-embedded log folder
+pytest_embedded_log/
 
-# Go workspace file
-go.work
-go.work.sum
+# idf-component-manager output
+dependencies.lock
 
 # env file
 .env
 
 # Editor/IDE
-# .idea/
-# .vscode/
+.vscode/
