@@ -89,7 +89,7 @@ void motion_task(void *pvParameter) {
         start_time = esp_timer_get_time();
         Motion_Read();
         end_time = esp_timer_get_time();
-
+        ESP_LOGI(MOTION_TAG, "Acc XYZ: %.2f, %.2f, %.2f m/s^2 ", _motion_data[20], _motion_data[21], _motion_data[22]);
         ESP_LOGI(MOTION_TAG, "Motion read time: %lldus", end_time - start_time);
         led_strip.LED(0, 0, 0);
         vTaskDelay(1000 / portTICK_PERIOD_MS); // Wait 1 second
