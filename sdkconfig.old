@@ -1059,13 +1059,50 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# Sense Configuration
+#
+# default:
+CONFIG_RETRY_NUM=5
+# default:
+CONFIG_ESP_WIFI_SSID="Rocky211"
+# default:
+CONFIG_ESP_WIFI_PASSWORD="raspberry"
+# default:
+# CONFIG_ESP_STATION_EXAMPLE_WPA3_SAE_PWE_HUNT_AND_PECK is not set
+# default:
+# CONFIG_ESP_STATION_EXAMPLE_WPA3_SAE_PWE_HASH_TO_ELEMENT is not set
+# default:
+CONFIG_ESP_STATION_EXAMPLE_WPA3_SAE_PWE_BOTH=y
+# default:
+CONFIG_ESP_WIFI_PW_ID=""
+# default:
+CONFIG_ESP_MAXIMUM_RETRY=5
+# default:
+# CONFIG_ESP_WIFI_AUTH_OPEN is not set
+# default:
+# CONFIG_ESP_WIFI_AUTH_WEP is not set
+# default:
+# CONFIG_ESP_WIFI_AUTH_WPA_PSK is not set
+# default:
+CONFIG_ESP_WIFI_AUTH_WPA2_PSK=y
+# default:
+# CONFIG_ESP_WIFI_AUTH_WPA_WPA2_PSK is not set
+# default:
+# CONFIG_ESP_WIFI_AUTH_WPA3_PSK is not set
+# default:
+# CONFIG_ESP_WIFI_AUTH_WPA2_WPA3_PSK is not set
+# default:
+# CONFIG_ESP_WIFI_AUTH_WAPI_PSK is not set
+# end of Sense Configuration
+
+#
 # Arduino Configuration
 #
 # default:
 CONFIG_ARDUINO_VARIANT="esp32c6"
 # default:
 CONFIG_ENABLE_ARDUINO_DEPENDS=y
-CONFIG_AUTOSTART_ARDUINO=y
+# CONFIG_AUTOSTART_ARDUINO is not set
 # default:
 CONFIG_ARDUINO_RUN_CORE0=y
 # default:
@@ -1120,20 +1157,13 @@ CONFIG_ARDUHAL_LOG_DEFAULT_LEVEL=1
 # CONFIG_ARDUHAL_ESP_LOG is not set
 # end of Debug Log Configuration
 
-# default:
-CONFIG_ARDUHAL_PARTITION_SCHEME_DEFAULT=y
-# default:
+# CONFIG_ARDUHAL_PARTITION_SCHEME_DEFAULT is not set
 # CONFIG_ARDUHAL_PARTITION_SCHEME_MINIMAL is not set
-# default:
-# CONFIG_ARDUHAL_PARTITION_SCHEME_NO_OTA is not set
-# default:
+CONFIG_ARDUHAL_PARTITION_SCHEME_NO_OTA=y
 # CONFIG_ARDUHAL_PARTITION_SCHEME_HUGE_APP is not set
-# default:
 # CONFIG_ARDUHAL_PARTITION_SCHEME_MIN_SPIFFS is not set
 # default:
-CONFIG_ARDUHAL_PARTITION_SCHEME="default"
-# default:
-# CONFIG_AUTOCONNECT_WIFI is not set
+CONFIG_ARDUHAL_PARTITION_SCHEME="no_ota"
 # default:
 # CONFIG_ARDUINO_SELECTIVE_COMPILATION is not set
 # end of Arduino Configuration

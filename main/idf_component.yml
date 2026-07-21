@@ -2,8 +2,3 @@ dependencies:
   espressif/arduino-esp32:
     pre_release: true
     version: '*'
-<<<<<<< HEAD
-=======
-  esp-now:
-    version: "2.*"
->>>>>>> a94b0f0 (update)
