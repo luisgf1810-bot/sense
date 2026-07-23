@@ -1,0 +1,1 @@
+static const char *RESP_COMP = "responder";

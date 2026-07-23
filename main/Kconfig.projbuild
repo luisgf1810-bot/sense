@@ -1,4 +1,16 @@
 menu "Sense Configuration"
+    
+    choice ESP_NOW_MODE
+        prompt "ESPNOW mode selection"
+        default ESPNOW_INITIATOR
+        help
+            Select initiator or responder mode for ESPNOW.
+        config ESPNOW_INITIATOR
+            bool "Initiator"
+        config ESPNOW_RESPONDER
+            bool "Responder"
+    endchoice
+
     config RETRY_NUM
         int "Packet retransmission count"
         default 5
@@ -6,7 +18,7 @@ menu "Sense Configuration"
             Set the packet retransmission count. The more retransmission 
             times, the lower the throughput rate.
 
-   config ESP_WIFI_SSID
+    config ESP_WIFI_SSID
         string "WiFi SSID"
         default "Rocky211"
         help
@@ -18,20 +30,6 @@ menu "Sense Configuration"
         help
             WiFi password (WPA or WPA2) for the example to use.
 
-    choice ESP_WIFI_SAE_MODE
-        prompt "WPA3 SAE mode selection"
-        default ESP_STATION_EXAMPLE_WPA3_SAE_PWE_BOTH
-        help
-            Select mode for SAE as Hunt and Peck, H2E or both.
-        config ESP_STATION_EXAMPLE_WPA3_SAE_PWE_HUNT_AND_PECK
-            bool "HUNT AND PECK"
-        config ESP_STATION_EXAMPLE_WPA3_SAE_PWE_HASH_TO_ELEMENT
-            bool "H2E"
-            depends on ESP_WIFI_ENABLE_SAE_H2E
-        config ESP_STATION_EXAMPLE_WPA3_SAE_PWE_BOTH
-            bool "BOTH"
-            depends on ESP_WIFI_ENABLE_SAE_H2E
-    endchoice
 
     config ESP_WIFI_PW_ID
         string "PASSWORD IDENTIFIER"
@@ -46,31 +44,6 @@ menu "Sense Configuration"
         help
             Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
 
-    choice ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD
-        prompt "WiFi Scan auth mode threshold"
-        default ESP_WIFI_AUTH_WPA2_PSK
-        help
-            The weakest authmode to accept in the scan mode.
-            This value defaults to ESP_WIFI_AUTH_WPA2_PSK in case password is present and ESP_WIFI_AUTH_OPEN is used.
-            Please select ESP_WIFI_AUTH_WEP/ESP_WIFI_AUTH_WPA_PSK in case AP is operating in WEP/WPA mode.
-
-        config ESP_WIFI_AUTH_OPEN
-            bool "OPEN"
-        config ESP_WIFI_AUTH_WEP
-            bool "WEP"
-        config ESP_WIFI_AUTH_WPA_PSK
-            bool "WPA PSK"
-        config ESP_WIFI_AUTH_WPA2_PSK
-            bool "WPA2 PSK"
-        config ESP_WIFI_AUTH_WPA_WPA2_PSK
-            bool "WPA/WPA2 PSK"
-        config ESP_WIFI_AUTH_WPA3_PSK
-            bool "WPA3 PSK"
-        config ESP_WIFI_AUTH_WPA2_WPA3_PSK
-            bool "WPA2/WPA3 PSK"
-        config ESP_WIFI_AUTH_WAPI_PSK
-            bool "WAPI PSK"
-    endchoice
 
     config ESPNOW_PMK
         string "ESPNOW primary master key"
@@ -144,5 +117,12 @@ menu "Sense Configuration"
             ESPNOW wake interval
 
 
-
+    config APP_ESPNOW_QUEUE_SIZE
+        int "Size of packet buffer queue"
+        default 32
+        help
+            Default is 32. If devices of initiator and responders is more than 32, please increase 
+            this number to decrease ESP-NOW send queue fail error. For example, set 100 when the
+            number of responder devices is 100.
+            
 endmenu
