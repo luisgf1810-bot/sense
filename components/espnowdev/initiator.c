@@ -223,7 +223,7 @@ static void espnow_task(void *pvParameter)
                 espnow_event_send_cb_t *send_cb = &evt.info.send_cb;
                 is_broadcast = IS_BROADCAST_ADDR(send_cb->mac_addr);
 
-                //ESP_LOGD(INIT_COMP, "Send data to "MACSTR", status1: %d", MAC2STR(send_cb->mac_addr), send_cb->status);
+                ESP_LOGD(INIT_COMP, "Send data to "MACSTR", status1: %d", MAC2STR(send_cb->mac_addr), send_cb->status);
 
                 if (is_broadcast && (send_param->broadcast == false)) {
                     break;
@@ -243,7 +243,7 @@ static void espnow_task(void *pvParameter)
                     vTaskDelay(send_param->delay/portTICK_PERIOD_MS);
                 }
 
-                //ESP_LOGI(INIT_COMP, "send data to "MACSTR"", MAC2STR(send_cb->mac_addr));
+                ESP_LOGI(INIT_COMP, "send data to "MACSTR"", MAC2STR(send_cb->mac_addr));
                 memcpy(send_param->dest_mac, send_cb->mac_addr, ESP_NOW_ETH_ALEN);
                 espnow_data_prepare(send_param);
                 /* Send the next data after the previous data is sent. */
@@ -261,7 +261,7 @@ static void espnow_task(void *pvParameter)
                 ret = espnow_data_parse(recv_cb->data, recv_cb->data_len, &recv_state, &recv_seq, &recv_magic);
                 free(recv_cb->data);
                 if (ret == ESPNOW_DATA_BROADCAST) {
-                    //ESP_LOGI(INIT_COMP, "Receive %dth broadcast data from: "MACSTR", len: %d", recv_seq, MAC2STR(recv_cb->mac_addr), recv_cb->data_len);
+                    ESP_LOGI(INIT_COMP, "Receive %dth broadcast data from: "MACSTR", len: %d", recv_seq, MAC2STR(recv_cb->mac_addr), recv_cb->data_len);
 
                     /* If MAC address does not exist in peer list, add it to peer list. */
                     if (esp_now_is_peer_exist(recv_cb->mac_addr) == false) {
@@ -297,7 +297,7 @@ static void espnow_task(void *pvParameter)
                          */
                         if (send_param->unicast == false && send_param->magic >= recv_magic) {
                     	    ESP_LOGI(INIT_COMP, "Start sending unicast data");
-                    	    //ESP_LOGI(INIT_COMP, "send data to "MACSTR"", MAC2STR(recv_cb->mac_addr));
+                    	    ESP_LOGI(INIT_COMP, "send data to "MACSTR"", MAC2STR(recv_cb->mac_addr));
 
                     	    /* Start sending unicast ESPNOW data. */
                             memcpy(send_param->dest_mac, recv_cb->mac_addr, ESP_NOW_ETH_ALEN);
@@ -315,13 +315,13 @@ static void espnow_task(void *pvParameter)
                     }
                 }
                 else if (ret == ESPNOW_DATA_UNICAST) {
-                    //ESP_LOGI(INITCOMP, "Receive %dth unicast data from: "MACSTR", len: %d", recv_seq, MAC2STR(recv_cb->mac_addr), recv_cb->data_len);
+                    ESP_LOGI(INIT_COMP, "Receive %dth unicast data from: "MACSTR", len: %d", recv_seq, MAC2STR(recv_cb->mac_addr), recv_cb->data_len);
 
                     /* If receive unicast ESPNOW data, also stop sending broadcast ESPNOW data. */
                     send_param->broadcast = false;
                 }
                 else {
-                    //ESP_LOGI(INITCOMP, "Receive error data from: "MACSTR"", MAC2STR(recv_cb->mac_addr));
+                    ESP_LOGI(INIT_COMP, "Receive error data from: "MACSTR"", MAC2STR(recv_cb->mac_addr));
                 }
                 break;
             }
